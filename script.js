@@ -233,7 +233,7 @@ const mailtoForm = document.querySelector("[data-mailto-form]");
 const formStatus = document.querySelector("[data-form-status]");
 
 if (mailtoForm instanceof HTMLFormElement) {
-  mailtoForm.addEventListener("submit", (event) => {
+  mailtoForm.addEventListener("submit", async (event) => {
     event.preventDefault();
 
     const formData = new FormData(mailtoForm);
@@ -244,26 +244,53 @@ if (mailtoForm instanceof HTMLFormElement) {
     const location = String(formData.get("location") || "").trim();
     const details = String(formData.get("details") || "").trim();
 
-    const subject = encodeURIComponent(`Estimate Request - ${project || "Fence Project"}`);
-    const body = encodeURIComponent(
-      [
-        "New estimate request from the website:",
-        "",
-        `Name: ${name}`,
-        `Phone: ${phone}`,
-        `Email: ${email}`,
-        `Project Type: ${project}`,
-        `Project Location: ${location}`,
-        "",
-        "Project Details:",
-        details || "No details provided."
-      ].join("\n")
-    );
-
-    window.location.href = `mailto:profence@caprofence.com?subject=${subject}&body=${body}`;
-
     if (formStatus) {
-      formStatus.textContent = "Your email app should open with the estimate request pre-filled.";
+      formStatus.textContent = "Sending your request...";
+    }
+
+    const submitButton = mailtoForm.querySelector('button[type="submit"]');
+
+    if (submitButton instanceof HTMLButtonElement) {
+      submitButton.disabled = true;
+      submitButton.textContent = "Sending...";
+    }
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          name,
+          phone,
+          email,
+          project,
+          location,
+          details
+        })
+      });
+
+      const result = await response.json().catch(() => ({}));
+
+      if (!response.ok || !result.ok) {
+        throw new Error(result.error || "Email delivery failed.");
+      }
+
+      mailtoForm.reset();
+
+      if (formStatus) {
+        formStatus.textContent = "Thanks. Your estimate request was sent successfully.";
+      }
+    } catch (error) {
+      if (formStatus) {
+        formStatus.textContent = "We could not send the form just yet. Please call or email us directly at profence@caprofence.com.";
+      }
+    } finally {
+      if (submitButton instanceof HTMLButtonElement) {
+        submitButton.disabled = false;
+        submitButton.textContent = "Request Estimate";
+      }
     }
   });
 }
