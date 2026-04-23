@@ -1,0 +1,11 @@
+<svg width="800" height="1000" viewBox="0 0 800 1000" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="1000" fill="#EFE5D9"/>
+  <rect x="88" y="128" width="624" height="744" rx="34" fill="#F9F4ED"/>
+  <path d="M188 212H242V790H188V212Z" fill="#AA4D1F"/>
+  <path d="M308 212H362V790H308V212Z" fill="#2F4737"/>
+  <path d="M428 212H482V790H428V212Z" fill="#AA4D1F"/>
+  <path d="M548 212H602V790H548V212Z" fill="#2F4737"/>
+  <path d="M168 366H624" stroke="#D87E49" stroke-width="22"/>
+  <path d="M168 548H624" stroke="#264333" stroke-width="22"/>
+  <text x="400" y="930" text-anchor="middle" fill="#4F473C" font-family="Arial, sans-serif" font-size="40">Replace with your HD project photo</text>
+</svg>

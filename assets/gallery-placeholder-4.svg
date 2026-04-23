@@ -1,0 +1,9 @@
+<svg width="800" height="1000" viewBox="0 0 800 1000" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="1000" fill="#F2EBE2"/>
+  <rect x="100" y="132" width="600" height="740" rx="34" fill="#FFF9F1"/>
+  <path d="M190 252C190 201.19 231.19 160 282 160H518C568.81 160 610 201.19 610 252V752C610 802.81 568.81 844 518 844H282C231.19 844 190 802.81 190 752V252Z" fill="#B55222"/>
+  <circle cx="400" cy="502" r="158" fill="#1D241F"/>
+  <path d="M276 504H524" stroke="#F7EEE0" stroke-width="18"/>
+  <path d="M400 380V628" stroke="#F7EEE0" stroke-width="18"/>
+  <text x="400" y="930" text-anchor="middle" fill="#62584B" font-family="Arial, sans-serif" font-size="40">Replace with your HD project photo</text>
+</svg>

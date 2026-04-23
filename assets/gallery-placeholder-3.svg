@@ -1,0 +1,13 @@
+<svg width="800" height="1000" viewBox="0 0 800 1000" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="1000" fill="#ECE9E1"/>
+  <rect x="80" y="120" width="640" height="760" rx="26" fill="#1D2120"/>
+  <path d="M160 214H640" stroke="#F1E7D6" stroke-opacity="0.16" stroke-width="12"/>
+  <path d="M160 332H640" stroke="#F1E7D6" stroke-opacity="0.16" stroke-width="12"/>
+  <path d="M160 450H640" stroke="#F1E7D6" stroke-opacity="0.16" stroke-width="12"/>
+  <path d="M160 568H640" stroke="#F1E7D6" stroke-opacity="0.16" stroke-width="12"/>
+  <path d="M160 686H640" stroke="#F1E7D6" stroke-opacity="0.16" stroke-width="12"/>
+  <path d="M230 170V830" stroke="#C86730" stroke-width="16"/>
+  <path d="M399 170V830" stroke="#F1E7D6" stroke-width="16"/>
+  <path d="M568 170V830" stroke="#C86730" stroke-width="16"/>
+  <text x="400" y="930" text-anchor="middle" fill="#5B554C" font-family="Arial, sans-serif" font-size="40">Replace with your HD project photo</text>
+</svg>
