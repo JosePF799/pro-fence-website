@@ -280,8 +280,10 @@ if (mailtoForm instanceof HTMLFormElement) {
       mailtoForm.reset();
 
       if (formStatus) {
-        formStatus.textContent = "Thanks. Your estimate request was sent successfully.";
+        formStatus.textContent = "Thanks. Redirecting you to the confirmation page...";
       }
+
+      window.location.assign("thank-you.html");
     } catch (error) {
       if (formStatus) {
         formStatus.textContent = "We could not send the form just yet. Please call or email us directly at profence@caprofence.com.";
