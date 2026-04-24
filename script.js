@@ -229,6 +229,30 @@ if (faqTriggers.length > 0) {
   });
 }
 
+const floatingCall = document.querySelector("[data-floating-call]");
+
+if (floatingCall instanceof HTMLElement) {
+  const mobileCallQuery = window.matchMedia("(max-width: 640px)");
+
+  const updateFloatingCall = () => {
+    const shouldDelay = mobileCallQuery.matches;
+    const revealPoint = Math.min(window.innerHeight * 0.75, 560);
+    const isVisible = !shouldDelay || window.scrollY > revealPoint;
+
+    floatingCall.classList.toggle("is-visible", isVisible);
+  };
+
+  updateFloatingCall();
+  window.addEventListener("scroll", updateFloatingCall, { passive: true });
+  window.addEventListener("resize", updateFloatingCall);
+
+  if (typeof mobileCallQuery.addEventListener === "function") {
+    mobileCallQuery.addEventListener("change", updateFloatingCall);
+  } else if (typeof mobileCallQuery.addListener === "function") {
+    mobileCallQuery.addListener(updateFloatingCall);
+  }
+}
+
 const mailtoForm = document.querySelector("[data-mailto-form]");
 const formStatus = document.querySelector("[data-form-status]");
 

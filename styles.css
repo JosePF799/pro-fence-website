@@ -1353,6 +1353,7 @@ h4 {
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.96);
   box-shadow: 0 18px 42px rgba(24, 31, 26, 0.18);
+  transition: opacity 180ms ease, transform 180ms ease;
 }
 
 .floating-call-link {
@@ -1666,6 +1667,18 @@ h4 {
 }
 
 @media (max-width: 640px) {
+  .floating-call {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(16px);
+  }
+
+  .floating-call.is-visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
   .section {
     padding-top: 56px;
   }
