@@ -350,6 +350,7 @@ h4,
 .process-card:hover,
 .faq-item:hover,
 .testimonial-card:hover,
+.supplier-card:hover,
 .next-card:hover,
 .sidebar-panel:hover,
 .gallery-card:hover,
@@ -824,6 +825,108 @@ h4 {
   text-transform: uppercase;
 }
 
+.supplier-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.supplier-card {
+  position: relative;
+  min-height: 220px;
+  padding: 24px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background:
+    radial-gradient(circle at top right, rgba(183, 138, 71, 0.14), transparent 34%),
+    linear-gradient(180deg, #ffffff 0%, var(--surface-muted) 100%);
+  box-shadow: var(--shadow-soft);
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+
+.supplier-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent) 0%, rgba(183, 138, 71, 0) 68%);
+}
+
+.supplier-card:hover {
+  border-color: var(--line-strong);
+  box-shadow: var(--shadow);
+}
+
+.supplier-logo-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 94px;
+  padding: 16px;
+  border: 1px solid rgba(216, 221, 216, 0.9);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.86);
+}
+
+.supplier-logo {
+  display: block;
+  width: auto;
+  max-width: min(100%, 210px);
+  max-height: 76px;
+  object-fit: contain;
+}
+
+.supplier-logo-wide {
+  max-width: min(100%, 230px);
+  max-height: 58px;
+}
+
+.supplier-logo-square {
+  max-height: 82px;
+}
+
+.supplier-logo-dark {
+  filter: grayscale(1) brightness(0);
+  opacity: 0.92;
+}
+
+.supplier-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 58px;
+  height: 58px;
+  border: 1px solid rgba(183, 138, 71, 0.3);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.72);
+  color: var(--accent-deep);
+  font-size: 0.88rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+.supplier-card h3 {
+  margin-top: 18px;
+}
+
+.supplier-card p {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+.supplier-note {
+  max-width: 860px;
+  margin: 22px auto 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.7;
+  text-align: center;
+}
+
 .feature-stack,
 .service-grid,
 .metrics-grid,
@@ -962,6 +1065,13 @@ h4 {
     linear-gradient(180deg, rgba(22, 28, 23, 0.12), rgba(22, 28, 23, 0.78)),
     linear-gradient(120deg, rgba(183, 138, 71, 0.2), rgba(29, 42, 33, 0.18)),
     url("assets/projects/steel-frame-wood-gate.jpg") center/cover no-repeat;
+}
+
+.page-suppliers .page-hero-art {
+  background:
+    linear-gradient(180deg, rgba(22, 28, 23, 0.16), rgba(22, 28, 23, 0.82)),
+    linear-gradient(120deg, rgba(183, 138, 71, 0.2), rgba(29, 42, 33, 0.18)),
+    url("assets/projects/security-perimeter-chain-link.jpg") center/cover no-repeat;
 }
 
 .review-rating-card {
@@ -1601,6 +1711,7 @@ h4 {
   .service-grid,
   .detail-grid,
   .testimonial-grid,
+  .supplier-grid,
   .next-grid,
   .metrics-grid,
   .process-grid,
@@ -1968,5 +2079,13 @@ h4 {
   .statement-band p {
     font-size: 0.98rem;
     line-height: 1.6;
+  }
+
+  .supplier-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .supplier-card {
+    min-height: auto;
   }
 }
