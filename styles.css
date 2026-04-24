@@ -1341,6 +1341,35 @@ h4 {
   color: rgba(255, 255, 255, 0.62);
 }
 
+.floating-call {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  padding: 7px;
+  border: 1px solid rgba(29, 42, 33, 0.14);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 18px 42px rgba(24, 31, 26, 0.18);
+}
+
+.floating-call-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 44px;
+  padding: 0 16px 0 14px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--accent) 0%, #c79b57 100%);
+  color: var(--brand-deep);
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
 .page-service-areas .page-hero-art {
   background:
     linear-gradient(180deg, rgba(8, 10, 9, 0.18), rgba(8, 10, 9, 0.4)),
@@ -1518,6 +1547,17 @@ h4 {
   .button-call {
     order: 5;
     width: 100%;
+  }
+
+  .floating-call {
+    right: 12px;
+    bottom: 12px;
+  }
+
+  .floating-call-link {
+    min-height: 42px;
+    padding-inline: 13px;
+    font-size: 0.78rem;
   }
 
   .section-heading-split,
