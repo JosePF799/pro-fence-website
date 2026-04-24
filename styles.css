@@ -1364,6 +1364,15 @@ h4 {
   font-weight: 800;
 }
 
+.footer-logo {
+  display: block;
+  width: clamp(150px, 17vw, 218px);
+  height: auto;
+  margin-bottom: 16px;
+  filter: brightness(0) invert(1);
+  opacity: 0.92;
+}
+
 .footer p,
 .footer a {
   color: rgba(255, 255, 255, 0.76);
