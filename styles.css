@@ -1720,12 +1720,12 @@ h4 {
   }
 
   .hero-slider {
-    min-height: 880px;
+    min-height: 810px;
   }
 
   .hero-slide {
     align-items: flex-start;
-    padding: 30px 20px 248px;
+    padding: 30px 20px 188px;
   }
 
   .hero-slide .eyebrow {
@@ -1758,7 +1758,7 @@ h4 {
   .hero-nav {
     left: 18px;
     right: 18px;
-    bottom: 72px;
+    bottom: 44px;
     display: grid;
     grid-template-columns: 1fr;
     gap: 8px;
