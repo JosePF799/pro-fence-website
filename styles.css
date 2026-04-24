@@ -137,8 +137,9 @@ code {
 
 .brand {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 14px;
+  gap: 2px;
 }
 
 .brand-mark {
@@ -152,12 +153,10 @@ code {
   padding: 0;
 }
 
-.brand-copy strong,
 .brand-copy span {
   display: block;
 }
 
-.brand-copy strong,
 h1,
 h2,
 h3,
@@ -166,15 +165,14 @@ h4,
   font-family: "Outfit", sans-serif;
 }
 
-.brand-copy strong {
-  font-size: 1.26rem;
-  font-weight: 800;
-  letter-spacing: 0.02em;
-}
-
 .brand-copy span {
-  margin-top: 3px;
-  font-size: 0.92rem;
+  max-width: 170px;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.05rem;
+  font-style: italic;
+  font-weight: 600;
+  line-height: 1.1;
+  text-align: center;
   color: var(--muted);
 }
 
@@ -1639,7 +1637,7 @@ h4 {
   }
 
   .brand {
-    gap: 10px;
+    gap: 1px;
     align-items: center;
   }
 
@@ -1648,12 +1646,9 @@ h4 {
     height: 46px;
   }
 
-  .brand-copy strong {
-    font-size: 1.02rem;
-  }
-
   .brand-copy span {
-    font-size: 0.82rem;
+    max-width: 130px;
+    font-size: 0.9rem;
   }
 
   .topbar-social {
