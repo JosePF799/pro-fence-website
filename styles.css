@@ -752,6 +752,40 @@ h4 {
   text-transform: uppercase;
 }
 
+.review-score-card {
+  background: linear-gradient(180deg, #ffffff 0%, var(--surface-muted) 100%);
+}
+
+.review-stars {
+  display: block;
+  margin-bottom: 12px;
+  color: var(--accent);
+  font-size: 1.42rem;
+  line-height: 1;
+}
+
+.testimonial-card strong {
+  display: block;
+  margin-top: 18px;
+  color: var(--ink);
+  font-size: 1.04rem;
+  font-weight: 800;
+}
+
+.testimonial-card span:not(.review-stars) {
+  display: block;
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.review-score-card .text-link {
+  margin-top: auto;
+}
+
 .feature-stack,
 .service-grid,
 .metrics-grid,
@@ -883,6 +917,46 @@ h4 {
     linear-gradient(180deg, rgba(22, 28, 23, 0.18), rgba(22, 28, 23, 0.84)),
     linear-gradient(120deg, rgba(183, 138, 71, 0.18), rgba(29, 42, 33, 0.18)),
     url("assets/projects/commercial-sliding-security-gate.jpg") center/cover no-repeat;
+}
+
+.page-testimonials .page-hero-art {
+  background:
+    linear-gradient(180deg, rgba(22, 28, 23, 0.12), rgba(22, 28, 23, 0.78)),
+    linear-gradient(120deg, rgba(183, 138, 71, 0.2), rgba(29, 42, 33, 0.18)),
+    url("assets/projects/steel-frame-wood-gate.jpg") center/cover no-repeat;
+}
+
+.review-rating-card {
+  text-align: center;
+}
+
+.review-rating-value {
+  display: block;
+  margin: 8px 0 10px;
+  color: var(--brand-deep);
+  font-family: "Outfit", sans-serif;
+  font-size: clamp(4rem, 8vw, 6.2rem);
+  font-weight: 800;
+  line-height: 0.9;
+}
+
+.review-platform-score {
+  display: block;
+  margin: 0 0 10px;
+  color: var(--brand-deep);
+  font-family: "Outfit", sans-serif;
+  font-size: 3.3rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.review-source-note {
+  max-width: 780px;
+  margin: 22px auto 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.7;
+  text-align: center;
 }
 
 .art-panel {
@@ -1293,6 +1367,11 @@ h4 {
 .footer p,
 .footer a {
   color: rgba(255, 255, 255, 0.76);
+}
+
+.footer .footer-trust {
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.92);
 }
 
 .footer-social-label {
