@@ -1667,18 +1667,6 @@ h4 {
 }
 
 @media (max-width: 640px) {
-  .floating-call {
-    opacity: 0;
-    pointer-events: none;
-    transform: translateY(16px);
-  }
-
-  .floating-call.is-visible {
-    opacity: 1;
-    pointer-events: auto;
-    transform: translateY(0);
-  }
-
   .section {
     padding-top: 56px;
   }
@@ -1732,12 +1720,12 @@ h4 {
   }
 
   .hero-slider {
-    min-height: 700px;
+    min-height: 880px;
   }
 
   .hero-slide {
     align-items: flex-start;
-    padding: 30px 20px 180px;
+    padding: 30px 20px 248px;
   }
 
   .hero-slide .eyebrow {
@@ -1751,15 +1739,15 @@ h4 {
   }
 
   .hero-slide-copy > :is(h1, h2) {
-    max-width: 8.6ch;
-    font-size: clamp(1.9rem, 8.8vw, 2.85rem);
+    max-width: 10.2ch;
+    font-size: clamp(1.85rem, 8vw, 2.55rem);
     line-height: 1.04;
   }
 
   .hero-slide .hero-text {
-    max-width: 30ch;
-    font-size: 0.92rem;
-    line-height: 1.5;
+    max-width: 31ch;
+    font-size: 0.9rem;
+    line-height: 1.48;
   }
 
   .hero-actions {
@@ -1770,7 +1758,7 @@ h4 {
   .hero-nav {
     left: 18px;
     right: 18px;
-    bottom: 18px;
+    bottom: 72px;
     display: grid;
     grid-template-columns: 1fr;
     gap: 8px;
