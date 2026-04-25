@@ -419,7 +419,7 @@ h4,
 
 .hero-slider {
   position: relative;
-  min-height: 620px;
+  min-height: 560px;
   overflow: hidden;
   border-radius: 34px;
   box-shadow: var(--shadow);
@@ -1758,7 +1758,7 @@ h4 {
   }
 
   .hero-slider {
-    min-height: 560px;
+    min-height: 520px;
   }
 }
 
