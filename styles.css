@@ -416,10 +416,18 @@ h4,
 }
 
 .button-call {
+  background: linear-gradient(135deg, var(--accent) 0%, #c79b57 100%);
+  border-color: transparent;
+  box-shadow: 0 14px 28px rgba(183, 138, 71, 0.24);
+  color: var(--brand-deep);
   min-height: 42px;
   padding: 0 18px;
   font-size: 0.78rem;
   white-space: nowrap;
+}
+
+.button-call:hover {
+  box-shadow: 0 18px 34px rgba(183, 138, 71, 0.3);
 }
 
 .hero-actions .button-outline,
