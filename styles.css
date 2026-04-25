@@ -1888,7 +1888,8 @@ h4 {
   }
 
   .hero-slide {
-    padding: 34px 24px 120px;
+    align-items: flex-start;
+    padding: 42px 24px 124px;
   }
 
   .hero-slide-copy {
