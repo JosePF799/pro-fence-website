@@ -1884,11 +1884,11 @@ h4 {
   .faq-grid,
   .gallery-preview,
   .hero-slider {
-    min-height: 440px;
+    min-height: 540px;
   }
 
   .hero-slide {
-    padding: 36px 24px 112px;
+    padding: 34px 24px 120px;
   }
 
   .hero-slide-copy {
@@ -1896,15 +1896,15 @@ h4 {
   }
 
   .hero-slide-copy > :is(h1, h2) {
-    max-width: 8.8ch;
-    font-size: clamp(2.7rem, 8.8vw, 4.2rem);
+    max-width: 9.8ch;
+    font-size: clamp(2.25rem, 7vw, 3.35rem);
     line-height: 1.05;
   }
 
   .hero-slide .hero-text {
-    max-width: 34ch;
-    font-size: 0.98rem;
-    line-height: 1.6;
+    max-width: 38ch;
+    font-size: 0.94rem;
+    line-height: 1.55;
   }
 
   .hero-actions {
