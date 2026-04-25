@@ -419,7 +419,7 @@ h4,
 
 .hero-slider {
   position: relative;
-  min-height: 500px;
+  min-height: 420px;
   overflow: hidden;
   border-radius: 34px;
   box-shadow: var(--shadow);
@@ -1758,7 +1758,7 @@ h4 {
   }
 
   .hero-slider {
-    min-height: 480px;
+    min-height: 420px;
   }
 }
 
@@ -1884,7 +1884,7 @@ h4 {
   .faq-grid,
   .gallery-preview,
   .hero-slider {
-    min-height: 520px;
+    min-height: 440px;
   }
 
   .hero-slide {
