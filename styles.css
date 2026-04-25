@@ -1884,7 +1884,7 @@ h4 {
   .faq-grid,
   .gallery-preview,
   .hero-slider {
-    min-height: 570px;
+    min-height: 610px;
   }
 
   .hero-slide {
@@ -1913,6 +1913,12 @@ h4 {
     margin-top: 16px;
   }
 
+  .hero-actions .button {
+    min-height: 46px;
+    padding: 0 18px;
+    font-size: 0.78rem;
+  }
+
   .home-review-strip {
     grid-template-columns: 1fr;
   }
@@ -1920,7 +1926,7 @@ h4 {
   .hero-nav {
     left: 20px;
     right: 20px;
-    bottom: 20px;
+    bottom: 24px;
     gap: 8px;
   }
 
