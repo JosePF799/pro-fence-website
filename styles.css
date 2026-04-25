@@ -321,6 +321,18 @@ h4,
   gap: 10px;
 }
 
+.topbar-actions {
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.topbar.is-scrolled .topbar-actions {
+  gap: 8px;
+}
+
 .topbar-social a {
   display: inline-flex;
   align-items: center;
@@ -401,6 +413,13 @@ h4,
   background: var(--brand-soft);
   color: var(--brand-deep);
   border-color: transparent;
+}
+
+.button-call {
+  min-height: 42px;
+  padding: 0 18px;
+  font-size: 0.78rem;
+  white-space: nowrap;
 }
 
 .hero-actions .button-outline,
@@ -1819,12 +1838,18 @@ h4 {
     text-align: center;
   }
 
-  .topbar-social {
+  .topbar-actions {
     order: 4;
+    width: 100%;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .topbar-social {
+    justify-content: center;
   }
 
   .button-call {
-    order: 5;
     width: 100%;
   }
 
@@ -2003,6 +2028,10 @@ h4 {
 
   .topbar-social {
     gap: 8px;
+  }
+
+  .topbar-actions {
+    gap: 9px;
   }
 
   .topbar-social a {
