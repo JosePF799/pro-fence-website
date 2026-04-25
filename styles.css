@@ -1884,12 +1884,12 @@ h4 {
   .faq-grid,
   .gallery-preview,
   .hero-slider {
-    min-height: 540px;
+    min-height: 570px;
   }
 
   .hero-slide {
     align-items: flex-start;
-    padding: 42px 24px 124px;
+    padding: 34px 24px 134px;
   }
 
   .hero-slide-copy {
@@ -1897,19 +1897,20 @@ h4 {
   }
 
   .hero-slide-copy > :is(h1, h2) {
-    max-width: 9.8ch;
-    font-size: clamp(2.25rem, 7vw, 3.35rem);
+    max-width: 10.8ch;
+    font-size: clamp(2rem, 6.2vw, 3rem);
     line-height: 1.05;
   }
 
   .hero-slide .hero-text {
-    max-width: 38ch;
-    font-size: 0.94rem;
-    line-height: 1.55;
+    max-width: 42ch;
+    font-size: 0.88rem;
+    line-height: 1.45;
   }
 
   .hero-actions {
-    margin-top: 22px;
+    gap: 10px;
+    margin-top: 16px;
   }
 
   .home-review-strip {
@@ -1924,8 +1925,8 @@ h4 {
   }
 
   .hero-tab {
-    padding: 10px 12px;
-    font-size: 0.72rem;
+    padding: 9px 11px;
+    font-size: 0.68rem;
     letter-spacing: 0.08em;
   }
 
