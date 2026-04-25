@@ -1,8 +1,18 @@
 const navToggle = document.querySelector(".nav-toggle");
 const nav = document.querySelector(".nav");
+const topbar = document.querySelector(".topbar");
 const moreMenu = document.querySelector("[data-more-menu]");
 const moreMenuToggle = document.querySelector("[data-more-toggle]");
 const moreMenuPanel = moreMenu?.querySelector(".more-menu-panel");
+
+if (topbar) {
+  const updateTopbarState = () => {
+    topbar.classList.toggle("is-scrolled", window.scrollY > 24);
+  };
+
+  updateTopbarState();
+  window.addEventListener("scroll", updateTopbarState, { passive: true });
+}
 
 if (navToggle && nav) {
   navToggle.addEventListener("click", () => {

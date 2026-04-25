@@ -125,7 +125,7 @@ code {
   justify-content: space-between;
   gap: 18px;
   margin-top: 14px;
-  padding: 16px 20px;
+  padding: 20px 24px;
   position: sticky;
   top: 14px;
   z-index: 20;
@@ -133,6 +133,14 @@ code {
   border: 1px solid var(--line);
   background: rgba(255, 255, 255, 0.96);
   box-shadow: var(--shadow-soft);
+  transition: padding 220ms ease, box-shadow 220ms ease, background-color 220ms ease, border-color 220ms ease;
+}
+
+.topbar.is-scrolled {
+  padding: 12px 18px;
+  border-color: rgba(196, 204, 196, 0.78);
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 14px 34px rgba(24, 31, 26, 0.1);
 }
 
 .brand {
@@ -140,17 +148,24 @@ code {
   flex-direction: column;
   align-items: center;
   gap: 2px;
+  transition: gap 220ms ease;
 }
 
 .brand-mark {
-  width: clamp(120px, 15vw, 165px);
-  height: 54px;
+  width: clamp(142px, 17vw, 192px);
+  height: 64px;
   flex: 0 0 auto;
   object-fit: contain;
   object-position: left center;
   background: transparent;
   border: 0;
   padding: 0;
+  transition: width 220ms ease, height 220ms ease;
+}
+
+.topbar.is-scrolled .brand-mark {
+  width: clamp(118px, 14vw, 158px);
+  height: 50px;
 }
 
 .brand-copy span {
@@ -174,6 +189,13 @@ h4,
   line-height: 1.1;
   text-align: center;
   color: var(--muted);
+  transition: font-size 220ms ease, opacity 220ms ease, max-width 220ms ease;
+}
+
+.topbar.is-scrolled .brand-copy span {
+  max-width: 148px;
+  font-size: 0.92rem;
+  opacity: 0.86;
 }
 
 .nav {
@@ -309,7 +331,12 @@ h4,
   border: 1px solid var(--line);
   background: rgba(244, 240, 230, 0.72);
   color: var(--brand-deep);
-  transition: transform 180ms ease, background-color 180ms ease, border-color 180ms ease;
+  transition: width 220ms ease, height 220ms ease, transform 180ms ease, background-color 180ms ease, border-color 180ms ease;
+}
+
+.topbar.is-scrolled .topbar-social a {
+  width: 38px;
+  height: 38px;
 }
 
 .topbar-social a:hover {
@@ -1743,6 +1770,11 @@ h4 {
   .topbar {
     flex-wrap: wrap;
     border-radius: 28px;
+    padding: 16px 18px;
+  }
+
+  .topbar.is-scrolled {
+    padding: 12px 16px;
   }
 
   .nav-toggle {
@@ -1928,8 +1960,12 @@ h4 {
 
   .topbar {
     gap: 14px;
-    padding: 14px 16px 16px;
+    padding: 16px 16px 18px;
     top: 10px;
+  }
+
+  .topbar.is-scrolled {
+    padding: 12px 14px 14px;
   }
 
   .brand {
@@ -1938,13 +1974,23 @@ h4 {
   }
 
   .brand-mark {
+    width: 124px;
+    height: 52px;
+  }
+
+  .topbar.is-scrolled .brand-mark {
     width: 108px;
-    height: 46px;
+    height: 44px;
   }
 
   .brand-copy span {
-    max-width: 130px;
-    font-size: 0.9rem;
+    max-width: 140px;
+    font-size: 0.95rem;
+  }
+
+  .topbar.is-scrolled .brand-copy span {
+    max-width: 126px;
+    font-size: 0.84rem;
   }
 
   .topbar-social {
@@ -1954,6 +2000,11 @@ h4 {
   .topbar-social a {
     width: 40px;
     height: 40px;
+  }
+
+  .topbar.is-scrolled .topbar-social a {
+    width: 38px;
+    height: 38px;
   }
 
   h1 {
