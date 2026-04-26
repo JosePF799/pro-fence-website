@@ -29,11 +29,19 @@ module.exports = async (req, res) => {
   const project = String(body.project || "Fence Installation").trim();
   const location = String(body.location || "").trim();
   const details = String(body.details || "").trim();
+  const attachment = normalizeAttachment(body.attachment);
 
   if (!name || !phone) {
     return res.status(400).json({
       ok: false,
       error: "Please fill out the required fields."
+    });
+  }
+
+  if (body.attachment && !attachment) {
+    return res.status(400).json({
+      ok: false,
+      error: "Please attach a photo or PDF under 3 MB."
     });
   }
 
@@ -46,6 +54,7 @@ module.exports = async (req, res) => {
     `Email: ${email || "Not provided"}`,
     `Project Type: ${project}`,
     `Project Location: ${location || "Not provided"}`,
+    `Attachment: ${attachment ? attachment.filename : "Not provided"}`,
     "",
     "Project Details:",
     details || "No details provided."
@@ -59,6 +68,7 @@ module.exports = async (req, res) => {
       <p><strong>Email:</strong> ${escapeHtml(email || "Not provided")}</p>
       <p><strong>Project Type:</strong> ${escapeHtml(project)}</p>
       <p><strong>Project Location:</strong> ${escapeHtml(location || "Not provided")}</p>
+      <p><strong>Attachment:</strong> ${escapeHtml(attachment ? attachment.filename : "Not provided")}</p>
       <p><strong>Project Details:</strong></p>
       <p style="white-space:pre-wrap;">${escapeHtml(details || "No details provided.")}</p>
     </div>
@@ -77,7 +87,16 @@ module.exports = async (req, res) => {
         reply_to: email || undefined,
         subject,
         text,
-        html
+        html,
+        attachments: attachment
+          ? [
+              {
+                filename: attachment.filename,
+                content: attachment.content,
+                content_type: attachment.contentType
+              }
+            ]
+          : undefined
       })
     });
 
@@ -106,4 +125,28 @@ function escapeHtml(value) {
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#39;");
+}
+
+function normalizeAttachment(attachment) {
+  if (!attachment || typeof attachment !== "object") {
+    return null;
+  }
+
+  const filename = String(attachment.filename || "").trim();
+  const content = String(attachment.content || "").trim();
+  const contentType = String(attachment.contentType || "application/octet-stream").trim();
+  const size = Number(attachment.size || 0);
+  const isAllowedType =
+    ["application/pdf", "image/gif", "image/heic", "image/heif", "image/jpeg", "image/png", "image/webp"].includes(contentType) ||
+    /\.pdf$/i.test(filename);
+
+  if (!filename || !content || !isAllowedType || !Number.isFinite(size) || size > 3 * 1024 * 1024) {
+    return null;
+  }
+
+  return {
+    filename,
+    content,
+    contentType
+  };
 }

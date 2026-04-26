@@ -241,6 +241,16 @@ if (faqTriggers.length > 0) {
 
 const mailtoForm = document.querySelector("[data-mailto-form]");
 const formStatus = document.querySelector("[data-form-status]");
+const MAX_ATTACHMENT_SIZE = 3 * 1024 * 1024;
+const ALLOWED_ATTACHMENT_TYPES = new Set([
+  "application/pdf",
+  "image/gif",
+  "image/heic",
+  "image/heif",
+  "image/jpeg",
+  "image/png",
+  "image/webp"
+]);
 
 if (mailtoForm instanceof HTMLFormElement) {
   mailtoForm.addEventListener("submit", async (event) => {
@@ -253,6 +263,7 @@ if (mailtoForm instanceof HTMLFormElement) {
     const project = String(formData.get("project") || "").trim();
     const location = String(formData.get("location") || "").trim();
     const details = String(formData.get("details") || "").trim();
+    const attachmentFile = formData.get("attachment");
 
     if (formStatus) {
       formStatus.textContent = "Sending your request...";
@@ -266,6 +277,11 @@ if (mailtoForm instanceof HTMLFormElement) {
     }
 
     try {
+      const attachment =
+        attachmentFile instanceof File && attachmentFile.size > 0
+          ? await prepareAttachment(attachmentFile)
+          : null;
+
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: {
@@ -277,7 +293,8 @@ if (mailtoForm instanceof HTMLFormElement) {
           email,
           project,
           location,
-          details
+          details,
+          attachment
         })
       });
 
@@ -296,7 +313,10 @@ if (mailtoForm instanceof HTMLFormElement) {
       window.location.assign("thank-you.html");
     } catch (error) {
       if (formStatus) {
-        formStatus.textContent = "We could not send the form just yet. Please call or email us directly at profence@caprofence.com.";
+        formStatus.textContent =
+          error instanceof Error && error.message
+            ? error.message
+            : "We could not send the form just yet. Please call or email us directly at profence@caprofence.com.";
       }
     } finally {
       if (submitButton instanceof HTMLButtonElement) {
@@ -304,5 +324,37 @@ if (mailtoForm instanceof HTMLFormElement) {
         submitButton.textContent = "Request Estimate";
       }
     }
+  });
+}
+
+async function prepareAttachment(file) {
+  const isAllowedType = ALLOWED_ATTACHMENT_TYPES.has(file.type) || /\.pdf$/i.test(file.name);
+
+  if (!isAllowedType) {
+    throw new Error("Please attach a photo or PDF file.");
+  }
+
+  if (file.size > MAX_ATTACHMENT_SIZE) {
+    throw new Error("Please keep the attachment under 3 MB.");
+  }
+
+  const dataUrl = await readFileAsDataUrl(file);
+  const content = String(dataUrl).split(",")[1] || "";
+
+  return {
+    filename: file.name,
+    content,
+    contentType: file.type || "application/octet-stream",
+    size: file.size
+  };
+}
+
+function readFileAsDataUrl(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+
+    reader.addEventListener("load", () => resolve(reader.result));
+    reader.addEventListener("error", () => reject(new Error("Could not read the attachment.")));
+    reader.readAsDataURL(file);
   });
 }

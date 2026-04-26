@@ -1512,6 +1512,19 @@ h4 {
   color: var(--ink);
 }
 
+.contact-form input[type="file"] {
+  padding: 12px;
+  border-style: dashed;
+  background: rgba(244, 240, 230, 0.72);
+  cursor: pointer;
+}
+
+.file-upload small {
+  color: var(--muted);
+  font-size: 0.86rem;
+  font-weight: 500;
+}
+
 .form-note,
 .form-status {
   font-size: 0.94rem;
