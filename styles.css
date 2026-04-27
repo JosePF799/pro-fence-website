@@ -73,7 +73,7 @@ code {
 .site-shell {
   width: min(var(--content-width), calc(100% - 32px));
   margin: 0 auto;
-  padding: 22px 0 40px;
+  padding: 0 0 40px;
 }
 
 .utility-bar {
@@ -120,27 +120,32 @@ code {
 }
 
 .topbar {
-  display: flex;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
-  justify-content: space-between;
-  gap: 18px;
-  margin-top: 14px;
-  padding: 20px 24px;
+  gap: 22px;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  margin-top: 0;
+  padding: 18px clamp(18px, 4vw, 54px);
   position: sticky;
-  top: 14px;
+  top: 0;
   z-index: 20;
-  border-radius: 999px;
-  border: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.96);
-  box-shadow: var(--shadow-soft);
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
+  background: rgba(255, 250, 241, 0.94);
+  box-shadow: none;
+  backdrop-filter: blur(14px);
   transition: padding 220ms ease, box-shadow 220ms ease, background-color 220ms ease, border-color 220ms ease;
 }
 
 .topbar.is-scrolled {
-  padding: 12px 18px;
-  border-color: rgba(196, 204, 196, 0.78);
-  background: rgba(255, 255, 255, 0.98);
-  box-shadow: 0 14px 34px rgba(24, 31, 26, 0.1);
+  padding: 14px clamp(18px, 4vw, 54px);
+  border-color: var(--line);
+  background: rgba(255, 250, 241, 0.97);
+  box-shadow: 0 10px 30px rgba(24, 31, 26, 0.08);
 }
 
 .brand {
@@ -148,12 +153,14 @@ code {
   flex-direction: column;
   align-items: center;
   gap: 2px;
+  min-height: 44px;
+  min-width: 220px;
   transition: gap 220ms ease;
 }
 
 .brand-mark {
-  width: clamp(142px, 17vw, 192px);
-  height: 64px;
+  width: clamp(210px, 18vw, 300px);
+  height: 70px;
   flex: 0 0 auto;
   object-fit: contain;
   object-position: left center;
@@ -164,8 +171,8 @@ code {
 }
 
 .topbar.is-scrolled .brand-mark {
-  width: clamp(118px, 14vw, 158px);
-  height: 50px;
+  width: min(230px, 28vw);
+  height: 56px;
 }
 
 .brand-copy span {
@@ -183,25 +190,28 @@ h4,
 .brand-copy span {
   max-width: 170px;
   font-family: "Cormorant Garamond", serif;
-  font-size: 1.05rem;
+  font-size: 0.98rem;
   font-style: italic;
   font-weight: 600;
   line-height: 1.1;
   text-align: center;
   color: var(--muted);
+  transform: translateX(-38px);
   transition: font-size 220ms ease, opacity 220ms ease, max-width 220ms ease;
 }
 
 .topbar.is-scrolled .brand-copy span {
-  max-width: 148px;
-  font-size: 0.92rem;
+  max-width: 140px;
+  font-size: 0.84rem;
   opacity: 0.86;
+  transform: translateX(-28px);
 }
 
 .nav {
   display: flex;
   align-items: center;
-  gap: 8px;
+  justify-content: center;
+  gap: 5px;
   flex-wrap: wrap;
 }
 
@@ -217,9 +227,9 @@ h4,
 }
 
 .nav a {
-  padding: 10px 14px;
+  padding: 10px 13px;
   border-radius: 999px;
-  font-size: 0.88rem;
+  font-size: 0.92rem;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -240,7 +250,7 @@ h4,
   border: 0;
   border-radius: 999px;
   background: transparent;
-  font-size: 0.88rem;
+  font-size: 0.92rem;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -265,8 +275,8 @@ h4,
 .more-menu-toggle:hover,
 .more-menu-toggle.is-active,
 .more-menu.is-open .more-menu-toggle {
-  background: var(--brand-soft);
-  color: var(--brand-deep);
+  background: var(--brand-deep);
+  color: var(--white);
   transform: translateY(-1px);
 }
 
@@ -316,15 +326,15 @@ h4,
 }
 
 .topbar-social {
-  display: flex;
+  display: none;
   align-items: center;
-  gap: 10px;
+  gap: 6px;
 }
 
 .topbar-actions {
   display: flex;
   flex: 0 0 auto;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   gap: 10px;
 }
@@ -337,8 +347,8 @@ h4,
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 42px;
-  height: 42px;
+  width: 34px;
+  height: 34px;
   border-radius: 999px;
   border: 1px solid var(--line);
   background: rgba(244, 240, 230, 0.72);
@@ -347,8 +357,8 @@ h4,
 }
 
 .topbar.is-scrolled .topbar-social a {
-  width: 38px;
-  height: 38px;
+  width: 32px;
+  height: 32px;
 }
 
 .topbar-social a:hover {
@@ -358,8 +368,8 @@ h4,
 }
 
 .topbar-social svg {
-  width: 18px;
-  height: 18px;
+  width: 15px;
+  height: 15px;
   fill: currentColor;
 }
 
@@ -418,16 +428,16 @@ h4,
 .button-call {
   background: linear-gradient(135deg, var(--accent) 0%, #c79b57 100%);
   border-color: transparent;
-  box-shadow: 0 14px 28px rgba(183, 138, 71, 0.24);
+  box-shadow: 0 10px 22px rgba(183, 138, 71, 0.22);
   color: var(--brand-deep);
-  min-height: 42px;
-  padding: 0 18px;
-  font-size: 0.78rem;
+  min-height: 44px;
+  padding: 0 16px;
+  font-size: 0.92rem;
   white-space: nowrap;
 }
 
 .button-call:hover {
-  box-shadow: 0 18px 34px rgba(183, 138, 71, 0.3);
+  box-shadow: 0 14px 28px rgba(183, 138, 71, 0.28);
 }
 
 .hero-actions .button-outline,
@@ -438,27 +448,26 @@ h4,
 }
 
 .hero-shell {
-  display: grid;
-  grid-template-columns: minmax(0, 1.35fr) minmax(320px, 0.65fr);
-  gap: 22px;
-  margin-top: 24px;
+  display: block;
+  width: 100vw;
+  margin: 0 calc(50% - 50vw);
 }
 
 .hero-slider {
   position: relative;
-  min-height: 420px;
+  min-height: min(760px, calc(100vh - 104px));
   overflow: hidden;
-  border-radius: 34px;
-  box-shadow: var(--shadow);
+  border-radius: 0;
+  box-shadow: none;
   background: #243328;
 }
 
 .hero-slide {
   position: absolute;
   inset: 0;
-  padding: 56px 56px 118px;
+  padding: clamp(54px, 7vw, 96px) clamp(18px, 5vw, 76px) clamp(104px, 9vw, 132px);
   display: flex;
-  align-items: end;
+  align-items: center;
   opacity: 0;
   pointer-events: none;
   transform: translateX(18px);
@@ -470,22 +479,22 @@ h4,
 
 .hero-slide-primary {
   background:
-    linear-gradient(180deg, rgba(17, 27, 21, 0.12), rgba(17, 27, 21, 0.82)),
-    linear-gradient(120deg, rgba(94, 120, 98, 0.36), rgba(19, 31, 23, 0.2)),
+    linear-gradient(105deg, rgba(13, 19, 16, 0.86) 0%, rgba(13, 19, 16, 0.62) 46%, rgba(13, 19, 16, 0.18) 78%, rgba(13, 19, 16, 0.04) 100%),
+    linear-gradient(180deg, rgba(13, 19, 16, 0.3) 0%, rgba(13, 19, 16, 0) 35%),
     url("assets/projects/cable-overlook-railing.jpg") center/cover no-repeat;
 }
 
 .hero-slide-secondary {
   background:
-    linear-gradient(180deg, rgba(24, 27, 20, 0.1), rgba(24, 27, 20, 0.84)),
-    linear-gradient(120deg, rgba(183, 138, 71, 0.24), rgba(29, 42, 33, 0.16)),
+    linear-gradient(105deg, rgba(13, 19, 16, 0.84) 0%, rgba(13, 19, 16, 0.6) 46%, rgba(13, 19, 16, 0.16) 78%, rgba(13, 19, 16, 0.04) 100%),
+    linear-gradient(180deg, rgba(13, 19, 16, 0.3) 0%, rgba(13, 19, 16, 0) 35%),
     url("assets/projects/hillside-estate-railings.jpg") center/cover no-repeat;
 }
 
 .hero-slide-tertiary {
   background:
-    linear-gradient(180deg, rgba(19, 25, 28, 0.14), rgba(19, 25, 28, 0.82)),
-    linear-gradient(120deg, rgba(68, 86, 74, 0.42), rgba(17, 26, 21, 0.18)),
+    linear-gradient(105deg, rgba(13, 19, 16, 0.84) 0%, rgba(13, 19, 16, 0.6) 46%, rgba(13, 19, 16, 0.16) 78%, rgba(13, 19, 16, 0.04) 100%),
+    linear-gradient(180deg, rgba(13, 19, 16, 0.3) 0%, rgba(13, 19, 16, 0) 35%),
     url("assets/projects/steel-frame-wood-gate.jpg") center/cover no-repeat;
 }
 
@@ -496,14 +505,14 @@ h4,
 }
 
 .hero-slide-copy {
-  max-width: 690px;
+  max-width: min(860px, calc(100% - 32px));
   color: var(--white);
 }
 
 .hero-slide-copy > :is(h1, h2) {
   color: var(--white);
-  font-size: clamp(3rem, 6vw, 5.35rem);
-  max-width: 11ch;
+  font-size: clamp(2.7rem, 5.4vw, 5.2rem);
+  max-width: 15ch;
 }
 
 .eyebrow {
@@ -577,6 +586,14 @@ h4 {
   color: rgba(255, 255, 255, 0.82);
 }
 
+.hero-slide .hero-text {
+  max-width: 740px;
+  margin-top: 18px;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: clamp(1.02rem, 1.6vw, 1.28rem);
+  line-height: 1.58;
+}
+
 .hero-actions,
 .section-actions,
 .cta-actions,
@@ -595,9 +612,9 @@ h4 {
 
 .hero-nav {
   position: absolute;
-  left: 28px;
-  right: 28px;
-  bottom: 28px;
+  left: clamp(18px, 5vw, 76px);
+  right: clamp(18px, 5vw, 76px);
+  bottom: 34px;
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
@@ -624,7 +641,7 @@ h4 {
 }
 
 .hero-sidebar {
-  display: grid;
+  display: none;
   gap: 18px;
 }
 
@@ -1798,7 +1815,7 @@ h4 {
   }
 
   .hero-slider {
-    min-height: 420px;
+    min-height: 680px;
   }
 }
 
@@ -1808,21 +1825,23 @@ h4 {
   }
 
   .topbar {
-    flex-wrap: wrap;
-    border-radius: 28px;
-    padding: 16px 18px;
+    grid-template-columns: auto 1fr;
+    border-radius: 0;
+    padding: 14px 16px;
   }
 
   .topbar.is-scrolled {
-    padding: 12px 16px;
+    padding: 11px 14px;
   }
 
   .nav-toggle {
     display: inline-flex;
+    justify-self: end;
   }
 
   .nav {
     display: none;
+    grid-column: 1 / -1;
     width: 100%;
     flex-direction: column;
     align-items: stretch;
@@ -1860,9 +1879,11 @@ h4 {
   }
 
   .topbar-actions {
+    grid-column: 1 / -1;
     order: 4;
     width: 100%;
     align-items: stretch;
+    flex-direction: column;
     gap: 10px;
   }
 
@@ -1930,12 +1951,12 @@ h4 {
   .faq-grid,
   .gallery-preview,
   .hero-slider {
-    min-height: 610px;
+    min-height: 640px;
   }
 
   .hero-slide {
-    align-items: flex-start;
-    padding: 34px 24px 134px;
+    align-items: center;
+    padding: 42px 24px 128px;
   }
 
   .hero-slide-copy {
@@ -1943,7 +1964,7 @@ h4 {
   }
 
   .hero-slide-copy > :is(h1, h2) {
-    max-width: 10.8ch;
+    max-width: 13.5ch;
     font-size: clamp(2rem, 6.2vw, 3rem);
     line-height: 1.05;
   }
@@ -1970,9 +1991,9 @@ h4 {
   }
 
   .hero-nav {
-    left: 20px;
-    right: 20px;
-    bottom: 24px;
+    left: 24px;
+    right: 24px;
+    bottom: 28px;
     gap: 8px;
   }
 
@@ -2013,13 +2034,13 @@ h4 {
   }
 
   .topbar {
-    gap: 14px;
-    padding: 16px 16px 18px;
-    top: 10px;
+    gap: 12px;
+    padding: 13px 14px;
+    top: 0;
   }
 
   .topbar.is-scrolled {
-    padding: 12px 14px 14px;
+    padding: 10px 12px;
   }
 
   .brand {
@@ -2028,23 +2049,25 @@ h4 {
   }
 
   .brand-mark {
-    width: 124px;
-    height: 52px;
+    width: 118px;
+    height: 48px;
   }
 
   .topbar.is-scrolled .brand-mark {
-    width: 108px;
-    height: 44px;
+    width: 104px;
+    height: 42px;
   }
 
   .brand-copy span {
-    max-width: 140px;
-    font-size: 0.95rem;
+    max-width: 118px;
+    font-size: 0.82rem;
+    transform: translateX(-18px);
   }
 
   .topbar.is-scrolled .brand-copy span {
-    max-width: 126px;
-    font-size: 0.84rem;
+    max-width: 104px;
+    font-size: 0.74rem;
+    transform: translateX(-14px);
   }
 
   .topbar-social {
@@ -2056,13 +2079,13 @@ h4 {
   }
 
   .topbar-social a {
-    width: 40px;
-    height: 40px;
+    width: 38px;
+    height: 38px;
   }
 
   .topbar.is-scrolled .topbar-social a {
-    width: 38px;
-    height: 38px;
+    width: 36px;
+    height: 36px;
   }
 
   h1 {
@@ -2084,12 +2107,12 @@ h4 {
   }
 
   .hero-slider {
-    min-height: 810px;
+    min-height: 760px;
   }
 
   .hero-slide {
     align-items: flex-start;
-    padding: 30px 20px 188px;
+    padding: 42px 20px 178px;
   }
 
   .hero-slide .eyebrow {
@@ -2103,7 +2126,7 @@ h4 {
   }
 
   .hero-slide-copy > :is(h1, h2) {
-    max-width: 10.2ch;
+    max-width: 11.8ch;
     font-size: clamp(1.85rem, 8vw, 2.55rem);
     line-height: 1.04;
   }
