@@ -1,3 +1,9 @@
+const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
+const RATE_LIMIT_MAX_REQUESTS = 5;
+const MIN_FORM_FILL_TIME_MS = 2500;
+const MAX_FORM_FILL_TIME_MS = 2 * 60 * 60 * 1000;
+const submissionAttempts = new Map();
+
 module.exports = async (req, res) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
@@ -11,25 +17,64 @@ module.exports = async (req, res) => {
     return res.status(405).json({ ok: false, error: "Method not allowed." });
   }
 
+  const origin = String(req.headers.origin || "");
+
+  if (origin && !isAllowedOrigin(origin)) {
+    return res.status(403).json({ ok: false, error: "Request blocked." });
+  }
+
+  const clientIp = getClientIp(req);
+
+  if (isRateLimited(clientIp)) {
+    return res.status(429).json({
+      ok: false,
+      error: "Too many submissions. Please wait a few minutes and try again."
+    });
+  }
+
   const resendApiKey = process.env.RESEND_API_KEY;
   const toEmail = process.env.CONTACT_TO_EMAIL || "profence@caprofence.com";
   const fromEmail = process.env.CONTACT_FROM_EMAIL || "onboarding@resend.dev";
 
-  if (!resendApiKey) {
-    return res.status(503).json({
+  let body;
+
+  try {
+    body = typeof req.body === "string" ? JSON.parse(req.body || "{}") : req.body || {};
+  } catch (error) {
+    return res.status(400).json({
       ok: false,
-      error: "Email delivery is not configured yet."
+      error: "Invalid request."
     });
   }
 
-  const body = typeof req.body === "string" ? JSON.parse(req.body || "{}") : req.body || {};
   const name = String(body.name || "").trim();
   const phone = String(body.phone || "").trim();
   const email = String(body.email || "").trim();
   const project = String(body.project || "Fence Installation").trim();
   const location = String(body.location || "").trim();
   const details = String(body.details || "").trim();
+  const companyWebsite = String(body.companyWebsite || "").trim();
+  const projectConfirm = String(body.projectConfirm || "").trim();
+  const startedAt = Number(body.startedAt || 0);
   const attachment = normalizeAttachment(body.attachment);
+
+  if (companyWebsite) {
+    return res.status(200).json({ ok: true });
+  }
+
+  if (projectConfirm !== "yes") {
+    return res.status(400).json({
+      ok: false,
+      error: "Please confirm this is a real project request."
+    });
+  }
+
+  if (!isReasonableFormTiming(startedAt)) {
+    return res.status(400).json({
+      ok: false,
+      error: "Please take a moment to complete the form before submitting."
+    });
+  }
 
   if (!name || !phone) {
     return res.status(400).json({
@@ -42,6 +87,20 @@ module.exports = async (req, res) => {
     return res.status(400).json({
       ok: false,
       error: "Please attach a photo or PDF under 3 MB."
+    });
+  }
+
+  if (hasTooManyLinks([name, phone, email, location, details].join(" "))) {
+    return res.status(400).json({
+      ok: false,
+      error: "Please remove extra links from the request and try again."
+    });
+  }
+
+  if (!resendApiKey) {
+    return res.status(503).json({
+      ok: false,
+      error: "Email delivery is not configured yet."
     });
   }
 
@@ -149,4 +208,49 @@ function normalizeAttachment(attachment) {
     content,
     contentType
   };
+}
+
+function isAllowedOrigin(origin) {
+  try {
+    const { hostname } = new URL(origin);
+    return (
+      hostname === "caprofence.com" ||
+      hostname === "www.caprofence.com" ||
+      hostname === "localhost" ||
+      hostname === "127.0.0.1" ||
+      hostname.endsWith(".vercel.app")
+    );
+  } catch (error) {
+    return false;
+  }
+}
+
+function getClientIp(req) {
+  const forwardedFor = String(req.headers["x-forwarded-for"] || "");
+  return forwardedFor.split(",")[0].trim() || String(req.socket?.remoteAddress || "unknown");
+}
+
+function isRateLimited(clientIp) {
+  const now = Date.now();
+  const current = submissionAttempts.get(clientIp) || [];
+  const recent = current.filter((timestamp) => now - timestamp < RATE_LIMIT_WINDOW_MS);
+
+  recent.push(now);
+  submissionAttempts.set(clientIp, recent);
+
+  return recent.length > RATE_LIMIT_MAX_REQUESTS;
+}
+
+function isReasonableFormTiming(startedAt) {
+  if (!Number.isFinite(startedAt) || startedAt <= 0) {
+    return false;
+  }
+
+  const elapsed = Date.now() - startedAt;
+  return elapsed >= MIN_FORM_FILL_TIME_MS && elapsed <= MAX_FORM_FILL_TIME_MS;
+}
+
+function hasTooManyLinks(value) {
+  const links = String(value).match(/https?:\/\/|www\./gi) || [];
+  return links.length > 2;
 }

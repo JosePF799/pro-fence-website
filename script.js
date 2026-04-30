@@ -253,6 +253,12 @@ const ALLOWED_ATTACHMENT_TYPES = new Set([
 ]);
 
 if (mailtoForm instanceof HTMLFormElement) {
+  const formStartedAt = mailtoForm.querySelector("[data-form-started-at]");
+
+  if (formStartedAt instanceof HTMLInputElement) {
+    formStartedAt.value = String(Date.now());
+  }
+
   mailtoForm.addEventListener("submit", async (event) => {
     event.preventDefault();
 
@@ -263,6 +269,9 @@ if (mailtoForm instanceof HTMLFormElement) {
     const project = String(formData.get("project") || "").trim();
     const location = String(formData.get("location") || "").trim();
     const details = String(formData.get("details") || "").trim();
+    const companyWebsite = String(formData.get("companyWebsite") || "").trim();
+    const projectConfirm = String(formData.get("projectConfirm") || "").trim();
+    const startedAt = String(formData.get("formStartedAt") || Date.now()).trim();
     const attachmentFile = formData.get("attachment");
 
     if (formStatus) {
@@ -294,6 +303,9 @@ if (mailtoForm instanceof HTMLFormElement) {
           project,
           location,
           details,
+          companyWebsite,
+          projectConfirm,
+          startedAt,
           attachment
         })
       });

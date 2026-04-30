@@ -1542,6 +1542,34 @@ h4 {
   font-weight: 500;
 }
 
+.bot-field {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.verification-check {
+  display: flex !important;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: rgba(244, 240, 230, 0.72);
+  font-weight: 600;
+}
+
+.contact-form .verification-check input {
+  width: auto;
+  min-width: 18px;
+  margin-top: 3px;
+  accent-color: var(--accent);
+}
+
 .form-note,
 .form-status {
   font-size: 0.94rem;
