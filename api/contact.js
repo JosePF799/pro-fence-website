@@ -1,7 +1,3 @@
-const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
-const RATE_LIMIT_MAX_REQUESTS = 15;
-const submissionAttempts = new Map();
-
 module.exports = async (req, res) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
@@ -75,15 +71,6 @@ module.exports = async (req, res) => {
     return res.status(400).json({
       ok: false,
       error: "Please remove extra links from the request and try again."
-    });
-  }
-
-  const clientIp = getClientIp(req);
-
-  if (isRateLimited(clientIp)) {
-    return res.status(429).json({
-      ok: false,
-      error: "Too many submissions from this connection. Please wait a few minutes, or call us directly at (510) 963-8985."
     });
   }
 
@@ -213,22 +200,6 @@ function isAllowedOrigin(origin) {
   } catch (error) {
     return false;
   }
-}
-
-function getClientIp(req) {
-  const forwardedFor = String(req.headers["x-forwarded-for"] || "");
-  return forwardedFor.split(",")[0].trim() || String(req.socket?.remoteAddress || "unknown");
-}
-
-function isRateLimited(clientIp) {
-  const now = Date.now();
-  const current = submissionAttempts.get(clientIp) || [];
-  const recent = current.filter((timestamp) => now - timestamp < RATE_LIMIT_WINDOW_MS);
-
-  recent.push(now);
-  submissionAttempts.set(clientIp, recent);
-
-  return recent.length > RATE_LIMIT_MAX_REQUESTS;
 }
 
 function hasTooManyLinks(value) {
