@@ -19,7 +19,7 @@ module.exports = async (req, res) => {
 
   const resendApiKey = process.env.RESEND_API_KEY;
   const toEmail = process.env.CONTACT_TO_EMAIL || "profence@caprofence.com";
-  const fromEmail = process.env.CONTACT_FROM_EMAIL || "onboarding@resend.dev";
+  const fromEmail = process.env.CONTACT_FROM_EMAIL || "Pro Fence Company <profence@caprofence.com>";
 
   let body;
 
@@ -136,14 +136,17 @@ module.exports = async (req, res) => {
       })
     });
 
+    const responseText = await response.text();
+
     if (!response.ok) {
-      const errorText = await response.text();
       return res.status(502).json({
         ok: false,
         error: "Email delivery failed.",
-        details: errorText
+        details: responseText
       });
     }
+
+    console.log("Resend accepted contact email", responseText);
 
     return res.status(200).json({ ok: true });
   } catch (error) {
