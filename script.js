@@ -254,9 +254,34 @@ const ALLOWED_ATTACHMENT_TYPES = new Set([
 
 if (mailtoForm instanceof HTMLFormElement) {
   const formStartedAt = mailtoForm.querySelector("[data-form-started-at]");
+  const fileInput = mailtoForm.querySelector("[data-file-input]");
+  const selectedFile = mailtoForm.querySelector("[data-file-selected]");
+  const selectedFileName = mailtoForm.querySelector("[data-file-name]");
+  const removeFileButton = mailtoForm.querySelector("[data-file-remove]");
 
   if (formStartedAt instanceof HTMLInputElement) {
     formStartedAt.value = String(Date.now());
+  }
+
+  if (
+    fileInput instanceof HTMLInputElement &&
+    selectedFile instanceof HTMLElement &&
+    selectedFileName instanceof HTMLElement &&
+    removeFileButton instanceof HTMLButtonElement
+  ) {
+    const updateSelectedFile = () => {
+      const file = fileInput.files && fileInput.files.length > 0 ? fileInput.files[0] : null;
+
+      selectedFile.hidden = !file;
+      selectedFileName.textContent = file ? file.name : "";
+    };
+
+    fileInput.addEventListener("change", updateSelectedFile);
+    removeFileButton.addEventListener("click", () => {
+      fileInput.value = "";
+      updateSelectedFile();
+      fileInput.focus();
+    });
   }
 
   mailtoForm.addEventListener("submit", async (event) => {
@@ -315,6 +340,10 @@ if (mailtoForm instanceof HTMLFormElement) {
       }
 
       mailtoForm.reset();
+      if (selectedFile instanceof HTMLElement && selectedFileName instanceof HTMLElement) {
+        selectedFile.hidden = true;
+        selectedFileName.textContent = "";
+      }
 
       if (formStatus) {
         formStatus.textContent = "Thanks. Redirecting you to the confirmation page...";

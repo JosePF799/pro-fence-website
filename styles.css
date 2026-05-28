@@ -1542,14 +1542,46 @@ h4 {
   font-weight: 500;
 }
 
-.bot-field {
-  position: absolute;
-  left: -10000px;
-  width: 1px;
-  height: 1px;
+.file-selected {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 14px;
+  border: 1px solid rgba(20, 28, 22, 0.12);
+  border-radius: 16px;
+  background: rgba(244, 240, 230, 0.72);
+}
+
+.file-selected[hidden] {
+  display: none;
+}
+
+.file-selected span {
+  min-width: 0;
   overflow: hidden;
-  opacity: 0;
-  pointer-events: none;
+  color: var(--ink);
+  font-size: 0.92rem;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.file-selected button {
+  flex: 0 0 auto;
+  border: 0;
+  background: transparent;
+  color: var(--brand);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.file-selected button:hover {
+  color: var(--accent);
 }
 
 .verification-check {
