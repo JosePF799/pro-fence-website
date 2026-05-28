@@ -24,6 +24,7 @@ if (navToggle && nav) {
 if (nav) {
   const currentPage = window.location.pathname.split("/").pop() || "index.html";
   const navLinks = Array.from(nav.querySelectorAll("a[href]"));
+  let hasActiveMoreLink = false;
 
   navLinks.forEach((link) => {
     const linkTarget = link.getAttribute("href");
@@ -33,14 +34,18 @@ if (nav) {
 
     if (isCurrent) {
       link.classList.add("is-active");
+      link.setAttribute("aria-current", "page");
 
       if (moreMenu?.contains(link)) {
-        moreMenuToggle?.classList.add("is-active");
+        hasActiveMoreLink = true;
       }
     } else {
       link.classList.remove("is-active");
+      link.removeAttribute("aria-current");
     }
   });
+
+  moreMenuToggle?.classList.toggle("is-active", hasActiveMoreLink);
 }
 
 if (moreMenu && moreMenuToggle && moreMenuPanel) {
