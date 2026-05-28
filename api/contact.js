@@ -58,7 +58,7 @@ module.exports = async (req, res) => {
   if (body.attachment && !attachment) {
     return res.status(400).json({
       ok: false,
-      error: "Please attach a photo or PDF under 3 MB."
+      error: "Please attach a photo or PDF under 15 MB."
     });
   }
 
@@ -174,7 +174,7 @@ function normalizeAttachment(attachment) {
     ["application/pdf", "image/gif", "image/heic", "image/heif", "image/jpeg", "image/png", "image/webp"].includes(contentType) ||
     /\.pdf$/i.test(filename);
 
-  if (!filename || !content || !isAllowedType || !Number.isFinite(size) || size > 3 * 1024 * 1024) {
+  if (!filename || !content || !isAllowedType || !Number.isFinite(size) || size > 15 * 1024 * 1024) {
     return null;
   }
 

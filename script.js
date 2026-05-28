@@ -241,7 +241,7 @@ if (faqTriggers.length > 0) {
 
 const mailtoForm = document.querySelector("[data-mailto-form]");
 const formStatus = document.querySelector("[data-form-status]");
-const MAX_ATTACHMENT_SIZE = 3 * 1024 * 1024;
+const MAX_ATTACHMENT_SIZE = 15 * 1024 * 1024;
 const ALLOWED_ATTACHMENT_TYPES = new Set([
   "application/pdf",
   "image/gif",
@@ -345,7 +345,7 @@ async function prepareAttachment(file) {
   }
 
   if (file.size > MAX_ATTACHMENT_SIZE) {
-    throw new Error("Please keep the attachment under 3 MB.");
+    throw new Error("Please keep the attachment under 15 MB.");
   }
 
   const dataUrl = await readFileAsDataUrl(file);
