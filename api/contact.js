@@ -19,7 +19,7 @@ module.exports = async (req, res) => {
 
   const resendApiKey = process.env.RESEND_API_KEY;
   const toEmail = process.env.CONTACT_TO_EMAIL || "profence@caprofence.com";
-  const fromEmail = process.env.CONTACT_FROM_EMAIL || "Pro Fence Company <profence@caprofence.com>";
+  const fromEmail = process.env.CONTACT_FROM_EMAIL || "Pro Fence Website <website@caprofence.com>";
 
   let body;
 
