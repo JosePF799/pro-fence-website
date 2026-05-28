@@ -1,5 +1,5 @@
 const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
-const RATE_LIMIT_MAX_REQUESTS = 5;
+const RATE_LIMIT_MAX_REQUESTS = 15;
 const submissionAttempts = new Map();
 
 module.exports = async (req, res) => {
@@ -19,15 +19,6 @@ module.exports = async (req, res) => {
 
   if (origin && !isAllowedOrigin(origin)) {
     return res.status(403).json({ ok: false, error: "Request blocked." });
-  }
-
-  const clientIp = getClientIp(req);
-
-  if (isRateLimited(clientIp)) {
-    return res.status(429).json({
-      ok: false,
-      error: "Too many submissions. Please wait a few minutes and try again."
-    });
   }
 
   const resendApiKey = process.env.RESEND_API_KEY;
@@ -84,6 +75,15 @@ module.exports = async (req, res) => {
     return res.status(400).json({
       ok: false,
       error: "Please remove extra links from the request and try again."
+    });
+  }
+
+  const clientIp = getClientIp(req);
+
+  if (isRateLimited(clientIp)) {
+    return res.status(429).json({
+      ok: false,
+      error: "Too many submissions from this connection. Please wait a few minutes, or call us directly at (510) 963-8985."
     });
   }
 
