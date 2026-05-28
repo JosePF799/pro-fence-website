@@ -38,13 +38,8 @@ module.exports = async (req, res) => {
   const project = String(body.project || "Fence Installation").trim();
   const location = String(body.location || "").trim();
   const details = String(body.details || "").trim();
-  const companyWebsite = String(body.companyWebsite || "").trim();
   const projectConfirm = String(body.projectConfirm || "").trim();
   const attachment = normalizeAttachment(body.attachment);
-
-  if (companyWebsite) {
-    return res.status(200).json({ ok: true });
-  }
 
   if (projectConfirm !== "yes") {
     return res.status(400).json({
