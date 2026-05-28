@@ -1,7 +1,5 @@
 const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
 const RATE_LIMIT_MAX_REQUESTS = 5;
-const MIN_FORM_FILL_TIME_MS = 2500;
-const MAX_FORM_FILL_TIME_MS = 2 * 60 * 60 * 1000;
 const submissionAttempts = new Map();
 
 module.exports = async (req, res) => {
@@ -55,7 +53,6 @@ module.exports = async (req, res) => {
   const details = String(body.details || "").trim();
   const companyWebsite = String(body.companyWebsite || "").trim();
   const projectConfirm = String(body.projectConfirm || "").trim();
-  const startedAt = Number(body.startedAt || 0);
   const attachment = normalizeAttachment(body.attachment);
 
   if (companyWebsite) {
@@ -66,13 +63,6 @@ module.exports = async (req, res) => {
     return res.status(400).json({
       ok: false,
       error: "Please confirm this is a real project request."
-    });
-  }
-
-  if (!isReasonableFormTiming(startedAt)) {
-    return res.status(400).json({
-      ok: false,
-      error: "Please take a moment to complete the form before submitting."
     });
   }
 
@@ -239,15 +229,6 @@ function isRateLimited(clientIp) {
   submissionAttempts.set(clientIp, recent);
 
   return recent.length > RATE_LIMIT_MAX_REQUESTS;
-}
-
-function isReasonableFormTiming(startedAt) {
-  if (!Number.isFinite(startedAt) || startedAt <= 0) {
-    return false;
-  }
-
-  const elapsed = Date.now() - startedAt;
-  return elapsed >= MIN_FORM_FILL_TIME_MS && elapsed <= MAX_FORM_FILL_TIME_MS;
 }
 
 function hasTooManyLinks(value) {
